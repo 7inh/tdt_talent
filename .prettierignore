@@ -1,25 +1,7 @@
 node_modules
 build
-coverage
-src/services/hasura/index.ts
 public
 
-# dont know why prettier ignore don't work with absolute path
-**/__generated__/root-types.ts
-**/__generated__/bob/root-types.ts
-**/__generated__/eureka/root-types.ts
-**/__generated__/fatima/root-types.ts
-**/services/bob/bob-types.ts
-**/services/eureka/eureka-types.ts
-**/services/fatima/fatima-types.ts
-**/schema.graphql
 .github
 
-__generated-*__.json
-scripts/depcruise-temp/final.json
-scripts/depcruise-strict/final.json
 global.d.ts
-
-**/squads/user/service/bob/bob-types.ts
-**/squads/user/service/fatima/fatima-types.ts
-**/src/squads/user/service/fatima-types.ts
