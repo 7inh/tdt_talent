@@ -10,8 +10,6 @@
     "importOrder": [
         "^react$",
         "^[a-z\\-/]*$",
-        "(^@material-ui|components|providers)",
-        "(^manabie-bob|^manabie-yasuo|^manabuf)",
         "(^[src/]*$|^[./]|^[../])",
         ""
     ],
