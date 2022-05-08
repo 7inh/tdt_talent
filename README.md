@@ -3,5 +3,5 @@
 create .env file contains
 
 ```shell
-PORT=
+PORT= 6969
 ```
