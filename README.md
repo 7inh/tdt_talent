@@ -2,4 +2,6 @@
 
 create .env file contains
 
+```shell
 PORT=
+```
