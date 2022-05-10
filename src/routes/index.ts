@@ -3,6 +3,6 @@ import express from "express";
 
 const routes = express.Router();
 
-routes.use('/account', account)
+routes.use("/account", account);
 
 export default routes;
