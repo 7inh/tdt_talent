@@ -15,12 +15,11 @@
 
         // Initialize Firebase
         firebase.initializeApp(firebaseConfig);
-        firebase.auth().setPersistence(firebase.auth.Auth.Persistence.NONE);
 
         firebase
             .auth()
             // .signInWithPopup(new firebase.auth.GoogleAuthProvider())
-            .signInWithEmailAndPassword("linhtq.tech@gmail.com", "Pi3.141592654")
+            .signInWithEmailAndPassword("", "")
             .then((result) => {
                 console.log('result', result)
                 result.user.getIdToken().then((token) => {

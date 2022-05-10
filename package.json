@@ -23,6 +23,7 @@
     "cors": "^2.8.5",
     "dotenv": "^16.0.0",
     "express": "^4.17.1",
+    "firebase": "^9.8.1",
     "firebase-admin": "^10.2.0",
     "mocha": "^10.0.0",
     "nodemon": "^2.0.15",
@@ -32,6 +33,6 @@
     "dev": "NODE_PATH=./ nodemon ./src/server.ts",
     "build": "npx tsc",
     "start": "NODE_PATH=./ node dist/server.js",
-    "test": "NODE_PATH=./ NODE_ENV=DEV npx mocha -r ts-node/register test/*.ts"
+    "test": "NODE_PATH=./ NODE_ENV=DEV npx mocha"
   }
 }
