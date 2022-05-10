@@ -27,9 +27,7 @@
         "lib": ["dom", "dom.iterable", "esnext"],
         "alwaysStrict": true,
         "baseUrl": "./",
-        "types": [
-            "@types/node",
-        ],
+        "types": ["@types/node", "@types/mocha", "@types/jest"],
     },
     "lib": ["es2015"]
 }
