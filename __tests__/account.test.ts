@@ -5,8 +5,7 @@ import chaiHttp from "chai-http";
 import app from "../src/server";
 import getToken from "./mocks";
 
-
-let mockToken : string = ""
+let mockToken: string = "";
 
 chai.use(chaiHttp);
 //Our parent block
@@ -26,7 +25,7 @@ describe("Account route", () => {
                 .end((err: any, res: any) => {
                     expect(err).to.eql(null);
                     expect(res.status).to.equal(200);
-                    expect(res.body).to.have.property('email');
+                    expect(res.body).to.have.property("email");
                     done();
                 });
         });
