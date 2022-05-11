@@ -1,11 +1,12 @@
-import { RequestType, ResponseType } from "src/types";
+import { NextType, RequestType, ResponseType } from "src/utils/types";
 
 class AccountController {
-    async login(req: RequestType, res: ResponseType) {
+    async login(req: RequestType, res: ResponseType, next: NextType) {
         try {
             res.status(200).json(req.user);
-        } catch (error) {
-            res.status(405).json("Unknown");
+        } catch (e) {
+            const err = new Error("Unauthorized");
+            return next(err);
         }
     }
 }

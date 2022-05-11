@@ -4,6 +4,7 @@ import dotenv from "dotenv";
 import cookieParser from "cookie-parser";
 import express, { Express } from "express";
 import routes from "./routes";
+import Handler from "./utils/Handler";
 
 dotenv.config();
 
@@ -17,6 +18,8 @@ app.use(express.urlencoded({ limit: "50mb", extended: true }));
 
 app.use("/public", express.static(path.resolve(__dirname, "../public")));
 app.use("/api", routes);
+
+app.use(Handler.errorHandler)
 
 app.listen(port, () => {
     return console.log(`Server is listening at http://localhost:${port}`);

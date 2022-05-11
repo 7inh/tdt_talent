@@ -29,5 +29,18 @@ describe("Account route", () => {
                     done();
                 });
         });
+
+        it("it should not return a user information", (done) => {
+            chai.request(app)
+                .get("/api/account/login")
+                .set("Content-Type", "application/json")
+                .auth("", { type: "bearer" })
+                .send({})
+                .end((err: any, res: any) => {
+                    expect(err).to.eql(null);
+                    expect(res.status).to.equal(400);
+                    done();
+                });
+        });
     });
 });
