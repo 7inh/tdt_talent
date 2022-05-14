@@ -1,3 +1,3 @@
-import knexConfig from '../../config/knex-config'
+import knexConfig from "../../config/knex-config";
 
-export default knexConfig
+export default knexConfig;

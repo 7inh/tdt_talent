@@ -6,7 +6,7 @@ export async function seed(knex: Knex): Promise<void> {
 
     // Inserts seed entries
     await knex("account").insert([
-        { email: 'link@example.com', password: "1234567890" },
-        { email: 'akarma@example.com', password: "1234567890" },
+        { email: "link@example.com", password: "1234567890" },
+        { email: "akarma@example.com", password: "1234567890" },
     ]);
-};
+}
