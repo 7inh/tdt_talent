@@ -25,14 +25,18 @@
     "express": "^4.17.1",
     "firebase": "^9.8.1",
     "firebase-admin": "^10.2.0",
+    "knex": "^2.0.0",
     "mocha": "^10.0.0",
     "nodemon": "^2.0.15",
+    "pg": "^8.7.3",
     "ts-mocha": "^10.0.0"
   },
   "scripts": {
     "dev": "NODE_PATH=./ nodemon ./src/server.ts",
     "build": "npx tsc",
     "start": "NODE_PATH=./ node dist/server.js",
-    "test": "NODE_PATH=./ NODE_ENV=DEV npx mocha"
+    "test": "NODE_PATH=./ NODE_ENV=DEV npx mocha",
+    "knex": "./node_modules/.bin/knex --knexfile src/database/knexfile.ts",
+    "knex:schema": "./node_modules/.bin/knex --knexfile src/database/knexfile.ts migrate:latest"
   }
 }
