@@ -1,27 +1,33 @@
 # tdt_talent
 
-### create .env file contains
+### Environment
+Create a `.env` file containing
 
-```shell
+```
 PORT=6969
 ```
 
-### Create knexfile
-create migration
+### Database
+Create migration
 
 ```
 knex migrate:make migration_name
 ```
 
-create schema
+Create schema
 
 ```
 knex migrate:latest
 knex migrate:up
 ```
 
-drop schema
+Drop schema
 
 ```
 knex migrate:down
+```
+
+Create data value
+```
+knex seed:run
 ```
