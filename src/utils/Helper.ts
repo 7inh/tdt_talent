@@ -1,9 +1,13 @@
 import admin from "../../config/firebase-config";
+import { VALID_EMAIL } from "./definitions";
 
-class Helper {
-    async decodeToken(token: string) {
+const Helper = {
+    decodeToken: async (token: string) => {
         return await admin.auth().verifyIdToken(token);
-    }
-}
+    },
+    checkValidEmail: (email: string) => {
+        return email.includes(VALID_EMAIL);
+    },
+};
 
-export default new Helper();
+export default Helper;

@@ -1,4 +1,5 @@
 import { NextType, RequestType, ResponseType } from "src/utils/types";
+import { ERROR_MESSAGE } from "./definitions";
 import Helper from "./Helper";
 
 class Middleware {
@@ -14,7 +15,7 @@ class Middleware {
 
             throw Error;
         } catch (e) {
-            next(new Error("Bad request"));
+            next(new Error(ERROR_MESSAGE.BAD_REQUEST));
         }
     }
 }
