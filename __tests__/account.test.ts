@@ -8,7 +8,7 @@ import getToken from "./mocks";
 let mockToken: string = "";
 
 chai.use(chaiHttp);
-//Our parent block
+
 describe("Account route", () => {
     beforeEach(async () => {
         const token = await getToken();
