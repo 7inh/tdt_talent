@@ -2,7 +2,7 @@ import { NextType, RequestType, ResponseType } from "src/utils/types";
 import { ERROR_MESSAGE } from "./definitions";
 import Helper from "./Helper";
 
-class Middleware {
+const Middleware = {
     async auth(req: RequestType, _res: ResponseType, next: NextType) {
         try {
             const token = req.headers.authorization.split(" ")[1];
@@ -17,7 +17,7 @@ class Middleware {
         } catch (e) {
             next(new Error(ERROR_MESSAGE.BAD_REQUEST));
         }
-    }
-}
+    },
+};
 
-export default new Middleware();
+export default Middleware;
