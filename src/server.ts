@@ -7,7 +7,7 @@ import dotenv from "dotenv";
 dotenv.config();
 
 import routes from "./routes";
-import Handler from "./utils/Handler";
+import Handler from "./utils/handler";
 
 const app: Express = express();
 const port = process.env.PORT || 3000;

@@ -1,6 +1,6 @@
 import { NextType, RequestType, ResponseType } from "src/utils/types";
 import { ERROR_MESSAGE } from "./definitions";
-import Helper from "./Helper";
+import Helper from "./helper";
 
 const Middleware = {
     async auth(req: RequestType, _res: ResponseType, next: NextType) {

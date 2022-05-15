@@ -1,4 +1,4 @@
-import MiddleWare from "src/utils/MiddleWare";
+import MiddleWare from "src/utils/middleware";
 import AccountController from "src/controllers/account.controller";
 
 const express = require("express");
