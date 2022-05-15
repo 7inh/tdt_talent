@@ -1,7 +1,13 @@
+import { createAccount } from "./account.mutation";
 import { getAccountByEmail } from "./account.query";
 
 const AccountService = {
-    getAccountByEmail: getAccountByEmail,
+    query: {
+        getAccountByEmail: getAccountByEmail,
+    },
+    mutation: {
+        createAccount: createAccount,
+    },
 };
 
 export default AccountService;

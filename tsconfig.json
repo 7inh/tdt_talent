@@ -28,6 +28,7 @@
         "alwaysStrict": true,
         "baseUrl": "./",
         "types": ["@types/node", "@types/mocha"],
+        "typeRoots": ["./node_modules/@types", "./src/utils/types"]
     },
     "lib": ["es2015"]
 }

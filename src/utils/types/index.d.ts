@@ -15,11 +15,11 @@ export type ResponseType = {
     json: any;
 };
 
-export type NextType = any
+export type NextType = any;
 
-export type ErrorType = { 
+export type ErrorType = {
     code: number;
-    status: number; 
-    name: any; 
-    message: any 
+    status: number;
+    name: any;
+    message: any;
 };
