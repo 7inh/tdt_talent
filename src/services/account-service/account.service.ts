@@ -11,8 +11,10 @@ const AccountService = {
         createAccount: async (account: Pick<Account, "email" | "role">) => {
             const trx = await database.transaction();
             try {
-                await createAccount(trx, account);
+                const newCreatedAccount = await createAccount(trx, account);
                 trx.commit();
+
+                return newCreatedAccount;
             } catch (error) {
                 trx.rollback();
                 throw error;

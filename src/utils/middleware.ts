@@ -13,18 +13,22 @@ const MiddleWare = {
 
                 if (userRequest.email && Helper.checkValidEmail(userRequest.email)) {
                     let account = await AccountService.query.getAccountByEmail(userRequest.email);
+
+                    if (!account) {
+                        return next(new Error(ERROR_MESSAGE.UNAUTHORIZED));
+                    }
+
                     req.body.user = { ...userRequest, ...account };
 
                     return next();
                 } else {
-                    const err = new Error(ERROR_MESSAGE.INVALID_EMAIL);
-                    return next(err);
+                    return next(new Error(ERROR_MESSAGE.INVALID_EMAIL));
                 }
             }
 
             throw Error;
         } catch (e) {
-            next(new Error(ERROR_MESSAGE.BAD_REQUEST));
+            return next(new Error(ERROR_MESSAGE.BAD_REQUEST));
         }
     },
 };

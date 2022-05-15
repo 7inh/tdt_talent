@@ -1,15 +1,22 @@
 import { ERROR_MESSAGE } from "src/utils/definitions";
 import express from "express";
+import AccountService from "src/services/account-service/account.service";
 
 const AccountController = {
     login: async (req: express.Request, res: express.Response, next: express.NextFunction) => {
         try {
-            const user = req.body.user;
-            return res.status(200).json(user);
+            const userRequest = req.body.user;
 
+            const account = await AccountService.mutation.createAccount({
+                email: userRequest.email,
+                role: "user",
+            });
+
+            if (!account) throw new Error
+
+            return res.status(200).json({...userRequest, ...account});
         } catch (e) {
-            const err = new Error(ERROR_MESSAGE.BAD_REQUEST);
-            return next(err);
+            return next( new Error(ERROR_MESSAGE.BAD_REQUEST));
         }
     },
 };
