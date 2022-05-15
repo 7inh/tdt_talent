@@ -1,22 +1,24 @@
 import AccountService from "src/services/account-service/account.service";
-import { NextType, RequestType, ResponseType } from "src/utils/types";
 import Helper from "src/utils/helper";
 import { ERROR_MESSAGE } from "src/utils/definitions";
+import express from "express";
 
 const AccountController = {
-    login: async (req: RequestType, res: ResponseType, next: NextType) => {
+    login: async (req: express.Request, res: express.Response, next: express.NextFunction) => {
         try {
-            if (Helper.checkValidEmail(req.user.email)) {
-                let account = await AccountService.query.getAccountByEmail(req.user.email);
+            const userRequest = req.body.user;
+
+            if (userRequest && Helper.checkValidEmail(userRequest.email)) {
+                let account = await AccountService.query.getAccountByEmail(userRequest.email);
 
                 if (!account) {
                     account = await AccountService.mutation.createAccount({
-                        email: req.user.email,
+                        email: userRequest.email,
                         role: "user",
                     });
                 }
 
-                return res.status(200).json({ ...req.user, ...account });
+                return res.status(200).json({ ...userRequest, ...account });
             }
 
             const err = new Error(ERROR_MESSAGE.INVALID_EMAIL);

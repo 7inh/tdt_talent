@@ -1,16 +1,19 @@
-import { NextType, RequestType, ResponseType } from "src/utils/types";
 import { ERROR_MESSAGE } from "./definitions";
+import express from "express";
 import Helper from "./helper";
 
-const Middleware = {
-    async auth(req: RequestType, _res: ResponseType, next: NextType) {
+const MiddleWare = {
+    async auth(req: express.Request, _res: express.Response, next: express.NextFunction) {
         try {
-            const token = req.headers.authorization.split(" ")[1];
-            const decodeValue = await Helper.decodeToken(token);
+            const token = req.headers.authorization?.split(" ")[1];
 
-            if (decodeValue) {
-                req.user = decodeValue;
-                return next();
+            if (token) {
+                const decodeValue = await Helper.decodeToken(token);
+
+                if (decodeValue) {
+                    req.body.user = decodeValue;
+                    return next();
+                }
             }
 
             throw Error;
@@ -20,4 +23,4 @@ const Middleware = {
     },
 };
 
-export default Middleware;
+export default MiddleWare;
