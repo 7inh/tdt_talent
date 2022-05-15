@@ -1,4 +1,4 @@
-import AccountService from "src/services/account/account.service";
+import AccountService from "src/services/account-service/account.service";
 import { NextType, RequestType, ResponseType } from "src/utils/types";
 import Helper from "src/utils/Helper";
 import { ERROR_MESSAGE } from "src/utils/definitions";
