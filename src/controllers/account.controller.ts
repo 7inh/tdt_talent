@@ -22,7 +22,6 @@ const AccountController = {
             const err = new Error(ERROR_MESSAGE.INVALID_EMAIL);
             return next(err);
         } catch (e) {
-            console.log(e);
             const err = new Error(ERROR_MESSAGE.BAD_REQUEST);
             return next(err);
         }
