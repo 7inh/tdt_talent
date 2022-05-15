@@ -1,6 +1,7 @@
 import { ERROR_MESSAGE } from "./definitions";
 import express from "express";
 import Helper from "./helper";
+import AccountService from "src/services/account-service/account.service";
 
 const MiddleWare = {
     async auth(req: express.Request, _res: express.Response, next: express.NextFunction) {
@@ -8,11 +9,16 @@ const MiddleWare = {
             const token = req.headers.authorization?.split(" ")[1];
 
             if (token) {
-                const decodeValue = await Helper.decodeToken(token);
+                const userRequest = await Helper.decodeToken(token);
 
-                if (decodeValue) {
-                    req.body.user = decodeValue;
+                if (userRequest.email && Helper.checkValidEmail(userRequest.email)) {
+                    let account = await AccountService.query.getAccountByEmail(userRequest.email);
+                    req.body.user = { ...userRequest, ...account };
+
                     return next();
+                } else {
+                    const err = new Error(ERROR_MESSAGE.INVALID_EMAIL);
+                    return next(err);
                 }
             }
 
