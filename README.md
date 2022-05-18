@@ -5,6 +5,12 @@ Create a `.env` file containing
 
 ```
 PORT=6969
+TEST_USER=email@example.com
+TEST_PASSWORD=1234567890
+DB_DEV_NAME=dbname
+DB_DEV_USER=dbuser
+DB_DEV_PASSWORD=dbpassword
+DB_DEV_HOST=localhost
 ```
 
 ### Database
