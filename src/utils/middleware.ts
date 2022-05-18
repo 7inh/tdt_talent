@@ -14,7 +14,7 @@ const MiddleWare = {
                 if (userRequest.email && Helper.checkValidEmail(userRequest.email)) {
                     let account = await AccountService.query.getAccountByEmail(userRequest.email);
 
-                    if (!account) {
+                    if (!account && req.originalUrl !== "/api/account/login") {
                         return next(new Error(ERROR_MESSAGE.UNAUTHORIZED));
                     }
 
