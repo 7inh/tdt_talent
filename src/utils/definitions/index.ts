@@ -19,4 +19,15 @@ export const ERROR_DETAIL = {
     },
 };
 
+export const SUCCESS_MESSAGE = {
+    CREATED: "CREATED",
+};
+
+export const SUCCESS_DETAIL = {
+    [SUCCESS_MESSAGE.CREATED]: {
+        status: 201,
+        message: "Created"
+    },
+};
+
 export const VALID_EMAIL = "@gmail.com";

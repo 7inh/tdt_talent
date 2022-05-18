@@ -1,0 +1,53 @@
+import chai from "chai";
+import { expect } from "chai";
+import chaiHttp from "chai-http";
+
+import app from "../src/server";
+import getToken from "./mocks";
+
+let mockToken: string = "";
+
+chai.use(chaiHttp);
+
+describe("Profile route", () => {
+    beforeEach(async () => {
+        const token = await getToken();
+        token && (mockToken = token);
+    });
+
+    describe("/create", () => {
+        it("it should return a user profile", (done) => {
+            chai.request(app)
+                .post("/api/profile/create")
+                .set("Content-Type", "application/json")
+                .auth(mockToken, { type: "bearer" })
+                .send({
+                    profile: {
+                        full_name: "best name ever",
+                        phone_number: "0987654321",
+                        address: "HCM",
+                    },
+                })
+                .end((err: any, res: any) => {
+                    expect(err).to.eql(null);
+                    expect(res.status).to.equal(201);
+                    expect(res.body).to.have.property("full_name");
+                    expect(res.body).to.have.property("account_id");
+                    done();
+                });
+        });
+
+        it("it should not return a user profile", (done) => {
+            chai.request(app)
+                .post("/api/profile/create")
+                .set("Content-Type", "application/json")
+                .auth("", { type: "bearer" })
+                .send({})
+                .end((err: any, res: any) => {
+                    expect(err).to.eql(null);
+                    expect(res.status).to.equal(400);
+                    done();
+                });
+        });
+    });
+});
