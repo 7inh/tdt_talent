@@ -14,7 +14,7 @@ export async function up(knex: Knex): Promise<void> {
         })
         .createTable("profile", (table) => {
             table.increments("id").primary().notNullable();
-            table.integer("account_id").references("account.id");
+            table.integer("account_id").references("account.id").onDelete('CASCADE').onUpdate('CASCADE');
 
             table.string("full_name");
             table.string("avatar_url");
