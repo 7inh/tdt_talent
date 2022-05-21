@@ -15,10 +15,10 @@ describe("Profile route", () => {
         token && (mockToken = token);
     });
 
-    describe("/create", () => {
+    describe("/upsert", () => {
         it("it should return a new user profile", (done) => {
             chai.request(app)
-                .post("/api/profile/create")
+                .post("/api/profile/upsert")
                 .set("Content-Type", "application/json")
                 .auth(mockToken, { type: "bearer" })
                 .send({
@@ -39,7 +39,7 @@ describe("Profile route", () => {
 
         it("it should not return a new user profile", (done) => {
             chai.request(app)
-                .post("/api/profile/create")
+                .post("/api/profile/upsert")
                 .set("Content-Type", "application/json")
                 .auth("", { type: "bearer" })
                 .send({})

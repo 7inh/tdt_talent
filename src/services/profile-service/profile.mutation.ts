@@ -8,3 +8,17 @@ export async function createProfile(
 ) {
     return await database("profile").transacting(trx).insert(profile).returning("*");
 }
+
+export async function updateProfile(
+    trx: Knex.Transaction<any, any[]>,
+    profile: Omit<Profile, "created_at" | "updated_at" | "deleted_at">,
+    profile_id: number
+) {
+    return await database("profile")
+        .transacting(trx)
+        .update({ ...profile, updated_at: new Date() })
+        .where({
+            id: profile_id,
+        })
+        .returning("*");
+}
