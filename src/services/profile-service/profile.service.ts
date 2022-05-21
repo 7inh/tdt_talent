@@ -1,9 +1,12 @@
 import database from "src/database/database";
 import { Profile } from "src/utils/types/tables.interface";
 import { createProfile } from "./profile.mutation";
+import { getProfileByAccountId } from "./profile.query";
 
 const ProfileService = {
-    query: {},
+    query: {
+        getProfileByAccountId: getProfileByAccountId,
+    },
     mutation: {
         createProfile: async (
             profile: Omit<Profile, "id" | "created_at" | "updated_at" | "deleted_at">

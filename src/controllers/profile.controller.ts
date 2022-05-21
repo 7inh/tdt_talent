@@ -10,15 +10,15 @@ const ProfileController = {
     ) => {
         try {
             const userRequest = req.body.user;
-            const profile = req.body.profile;
+            const profileRequest = req.body.profile;
 
-            if (profile) {
-                const newProfile = await ProfileService.mutation.createProfile({
-                    ...profile,
+            if (profileRequest) {
+                const profileDatabase = await ProfileService.mutation.createProfile({
+                    ...profileRequest,
                     account_id: userRequest.id,
                 });
 
-                return res.status(SUCCESS_DETAIL[SUCCESS_MESSAGE.CREATED].status).json(newProfile);
+                return res.status(SUCCESS_DETAIL[SUCCESS_MESSAGE.CREATED].status).json(profileDatabase);
             }
 
             throw new Error();
@@ -26,6 +26,16 @@ const ProfileController = {
             return next(new Error(ERROR_MESSAGE.BAD_REQUEST));
         }
     },
+    getProfile: async (req: express.Request, res: express.Response, next: express.NextFunction) => {
+        try {
+            const userRequest = req.body.user;
+            const profileDatabase = await ProfileService.query.getProfileByAccountId(userRequest.id)
+            
+            return res.status(SUCCESS_DETAIL[SUCCESS_MESSAGE.OK].status).json(profileDatabase);
+        } catch (error) {
+            return next(new Error(ERROR_MESSAGE.BAD_REQUEST));
+        }
+    }
 };
 
 export default ProfileController;

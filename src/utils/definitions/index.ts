@@ -20,10 +20,15 @@ export const ERROR_DETAIL = {
 };
 
 export const SUCCESS_MESSAGE = {
+    OK: "OK",
     CREATED: "CREATED",
 };
 
 export const SUCCESS_DETAIL = {
+    [SUCCESS_MESSAGE.OK]: {
+        status: 200,
+        message: "The request succeeded"
+    },
     [SUCCESS_MESSAGE.CREATED]: {
         status: 201,
         message: "Created"
