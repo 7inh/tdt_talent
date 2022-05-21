@@ -2,12 +2,11 @@ export interface Account {
     id: number;
     email: string;
     password: string;
-    role: string;
+    role: "user" | "student" | "company" | "admin";
     created_at: Date;
     updated_at: Date;
     deleted_at: Date;
 }
-
 
 export interface Profile {
     id: number;
