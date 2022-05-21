@@ -35,8 +35,8 @@ export async function up(knex: Knex): Promise<void> {
         })
         .createTable("thread", (table) => {
             table.increments("id").primary().notNullable();
-            table.integer("account_id").references("account.id");
-            table.integer("topic_id").references("topic.id");
+            table.integer("account_id").references("account.id").onDelete('CASCADE').onUpdate('CASCADE');
+            table.integer("topic_id").references("topic.id").onDelete('SET NULL').onUpdate('CASCADE');
 
             table.string("type");
             table.string("title");
