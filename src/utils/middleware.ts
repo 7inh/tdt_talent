@@ -11,14 +11,16 @@ const MiddleWare = {
             if (token) {
                 const userRequest = await Helper.decodeToken(token);
 
-                if (userRequest.email && Helper.checkValidEmail(userRequest.email)) {
-                    let account = await AccountService.query.getAccountByEmail(userRequest.email);
+                if (userRequest && userRequest.email && Helper.checkValidEmail(userRequest.email)) {
+                    const accountDatabase = await AccountService.query.getAccountByEmail(
+                        userRequest.email
+                    );
 
-                    if (!account && req.originalUrl !== "/api/account/login") {
+                    if (!accountDatabase && req.originalUrl !== "/api/account/login") {
                         return next(new Error(ERROR_MESSAGE.UNAUTHORIZED));
                     }
 
-                    req.body.user = { ...userRequest, ...account };
+                    req.body.user = { ...userRequest, ...accountDatabase };
 
                     return next();
                 } else {

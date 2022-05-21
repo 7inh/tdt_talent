@@ -4,7 +4,7 @@ export async function up(knex: Knex): Promise<void> {
     return knex.schema
         .createTable("account", (table) => {
             table.increments("id").primary().notNullable();
-            table.string("email").primary().notNullable();
+            table.string("email").notNullable();
             table.string("password");
             table.string("role");
 
@@ -38,6 +38,7 @@ export async function up(knex: Knex): Promise<void> {
             table.integer("account_id").references("account.id");
             table.integer("topic_id").references("topic.id");
 
+            table.string("type");
             table.string("title");
             table.text("description");
             table.string("attach_jd");
