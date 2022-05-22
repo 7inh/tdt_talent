@@ -1,3 +1,4 @@
+import { table } from "console";
 import { Knex } from "knex";
 
 export async function up(knex: Knex): Promise<void> {
@@ -48,6 +49,18 @@ export async function up(knex: Knex): Promise<void> {
 
             table.datetime("expire_date");
             table.integer("applicant_limit");
+
+            table.datetime("created_at").defaultTo(knex.fn.now());
+            table.datetime("updated_at");
+            table.datetime("deleted_at");
+        })
+        .createTable("notification", (table) => {
+            table.increments("id").primary().notNullable();
+            table.integer("from").references("account.id").onDelete('CASCADE').onUpdate('CASCADE');
+            table.integer("to").references("account.id").onDelete('CASCADE').onUpdate('CASCADE');
+
+            table.text("message");
+            table.string("action");
 
             table.datetime("created_at").defaultTo(knex.fn.now());
             table.datetime("updated_at");
