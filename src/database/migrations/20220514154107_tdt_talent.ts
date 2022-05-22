@@ -38,11 +38,12 @@ export async function up(knex: Knex): Promise<void> {
             table.integer("account_id").references("account.id").onDelete('CASCADE').onUpdate('CASCADE');
             table.integer("topic_id").references("topic.id").onDelete('SET NULL').onUpdate('CASCADE');
 
-            table.string("type");
             table.string("title");
             table.text("description");
             table.string("attach_jd");
             table.integer("salary");
+            table.string("location");
+            table.string("employment_type"); // fulltime, part-time, remote, internship
             table.integer("experiment_requirement");
 
             table.datetime("expire_date");
