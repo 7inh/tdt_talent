@@ -18,7 +18,7 @@ app.use(express.json({ limit: "50mb" }));
 app.use(express.urlencoded({ limit: "50mb", extended: true }));
 
 app.use("/public", express.static(path.resolve(__dirname, "../public")));
-app.use("/api", routes);
+app.use("/", routes);
 
 app.use(Handler.errorHandler)
 

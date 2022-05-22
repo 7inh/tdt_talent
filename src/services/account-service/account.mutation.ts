@@ -8,3 +8,17 @@ export async function createAccount(
 ) {
     return await database("account").transacting(trx).insert(account).returning(["email", "role"]);
 }
+
+export async function updateAccount(
+    trx: Knex.Transaction<any, any[]>,
+    account: Pick<Account, "role">,
+    account_id: number
+) {
+    return await database("account")
+        .transacting(trx)
+        .update({ ...account, updated_at: new Date() })
+        .where({
+            id: account_id,
+        })
+        .returning("*");
+}

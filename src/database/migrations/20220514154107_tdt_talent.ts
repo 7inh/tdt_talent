@@ -1,4 +1,3 @@
-import { table } from "console";
 import { Knex } from "knex";
 
 export async function up(knex: Knex): Promise<void> {
@@ -7,7 +6,7 @@ export async function up(knex: Knex): Promise<void> {
             table.increments("id").primary().notNullable();
             table.string("email").notNullable();
             table.string("password");
-            table.string("role");
+            table.string("role"); // user, applicant, company, admin
 
             table.datetime("created_at").defaultTo(knex.fn.now());
             table.datetime("updated_at");
@@ -34,7 +33,7 @@ export async function up(knex: Knex): Promise<void> {
             table.string("title");
             table.text("description");
         })
-        .createTable("thread", (table) => {
+        .createTable("job", (table) => {
             table.increments("id").primary().notNullable();
             table.integer("account_id").references("account.id").onDelete('CASCADE').onUpdate('CASCADE');
             table.integer("topic_id").references("topic.id").onDelete('SET NULL').onUpdate('CASCADE');
@@ -48,7 +47,21 @@ export async function up(knex: Knex): Promise<void> {
             table.integer("experiment_requirement");
 
             table.datetime("expire_date");
-            table.integer("applicant_limit");
+            table.integer("candidate_limit");
+
+            table.string("state"); // active, pending, rejected, expired
+
+            table.datetime("created_at").defaultTo(knex.fn.now());
+            table.datetime("updated_at");
+            table.datetime("deleted_at");
+        })
+        .createTable("application", (table) => {
+            table.increments("id").primary().notNullable();
+            table.integer("applicant").references("account.id").onDelete('CASCADE').onUpdate('CASCADE');
+            table.integer("company").references("account.id").onDelete('CASCADE').onUpdate('CASCADE');
+
+            table.text("message");
+            table.string("state"); // approved, rejected, pending
 
             table.datetime("created_at").defaultTo(knex.fn.now());
             table.datetime("updated_at");
@@ -58,10 +71,12 @@ export async function up(knex: Knex): Promise<void> {
             table.increments("id").primary().notNullable();
             table.integer("from").references("account.id").onDelete('CASCADE').onUpdate('CASCADE');
             table.integer("to").references("account.id").onDelete('CASCADE').onUpdate('CASCADE');
+            table.integer("topic_id").references("topic.id").onDelete('SET NULL').onUpdate('CASCADE');
 
             table.text("message");
-            table.string("action");
-
+            table.string("action"); // approved, rejected, applied
+            table.boolean("read");
+ 
             table.datetime("created_at").defaultTo(knex.fn.now());
             table.datetime("updated_at");
             table.datetime("deleted_at");

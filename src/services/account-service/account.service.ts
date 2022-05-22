@@ -1,6 +1,6 @@
 import database from "src/database/database";
 import { Account } from "src/utils/types/tables.interface";
-import { createAccount } from "./account.mutation";
+import { createAccount, updateAccount } from "./account.mutation";
 import { getAccountByEmail } from "./account.query";
 
 const AccountService = {
@@ -16,6 +16,26 @@ const AccountService = {
 
                 return newCreatedAccount;
             } catch (error) {
+                trx.rollback();
+                throw error;
+            }
+        },
+        updateAccount: async (account: Pick<any, "id" | "role">) => {
+            const trx = await database.transaction();
+            try {
+                const account_id = account.id;
+                const [accountUpdated] = await updateAccount(
+                    trx,
+                    {
+                        role: account.role,
+                    },
+                    account_id
+                );
+                trx.commit();
+
+                return accountUpdated;
+            } catch (error) {
+                console.log(error);
                 trx.rollback();
                 throw error;
             }

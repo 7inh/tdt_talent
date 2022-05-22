@@ -2,7 +2,7 @@ export interface Account {
     id: number;
     email: string;
     password: string;
-    role: "user" | "student" | "company" | "admin";
+    role: "user" | "candidate" | "company"; // "admin" role can't not be created by api;
     created_at: Date;
     updated_at: Date;
     deleted_at: Date;
