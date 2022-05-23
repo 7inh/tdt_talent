@@ -72,9 +72,8 @@ export async function up(knex: Knex): Promise<void> {
             table.integer("to").references("account.id").onDelete('CASCADE').onUpdate('CASCADE');
             table.integer("topic_id").references("topic.id").onDelete('SET NULL').onUpdate('CASCADE');
 
-            table.string("target"); // applicant, company
             table.string("action"); // approved, rejected, applied
-            table.boolean("read");
+            table.boolean("read").defaultTo(false);
  
             table.datetime("created_at").defaultTo(knex.fn.now());
             table.datetime("updated_at");
