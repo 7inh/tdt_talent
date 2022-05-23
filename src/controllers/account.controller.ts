@@ -10,7 +10,7 @@ const AccountController = {
                 (await AccountService.query.getAccountByEmail(userRequest.email)) ||
                 (await AccountService.mutation.createAccount({
                     email: userRequest.email,
-                    role: "user",
+                    role: userRequest.role || "user",
                 }));
 
             if (!accountDatabase) throw new Error();
@@ -33,7 +33,10 @@ const AccountController = {
 
             if (!userRequest) throw new Error();
 
-            const accountDatabase = await AccountService.mutation.updateAccount(userRequest);
+            const accountDatabase = await AccountService.mutation.updateAccount({
+                id: userRequest.id,
+                role: userRequest.role || "user",
+            });
 
             return res
                 .status(SUCCESS_DETAIL[SUCCESS_MESSAGE.OK].status)

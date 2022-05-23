@@ -24,13 +24,7 @@ const AccountService = {
             const trx = await database.transaction();
             try {
                 const account_id = account.id;
-                const [accountUpdated] = await updateAccount(
-                    trx,
-                    {
-                        role: account.role,
-                    },
-                    account_id
-                );
+                const [accountUpdated] = await updateAccount(trx, account, account_id);
                 trx.commit();
 
                 return accountUpdated;
