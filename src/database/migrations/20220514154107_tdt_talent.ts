@@ -60,7 +60,6 @@ export async function up(knex: Knex): Promise<void> {
             table.integer("applicant").references("account.id").onDelete('CASCADE').onUpdate('CASCADE');
             table.integer("company").references("account.id").onDelete('CASCADE').onUpdate('CASCADE');
 
-            table.text("message");
             table.string("state"); // approved, rejected, pending
 
             table.datetime("created_at").defaultTo(knex.fn.now());
@@ -73,7 +72,7 @@ export async function up(knex: Knex): Promise<void> {
             table.integer("to").references("account.id").onDelete('CASCADE').onUpdate('CASCADE');
             table.integer("topic_id").references("topic.id").onDelete('SET NULL').onUpdate('CASCADE');
 
-            table.text("message");
+            table.string("target"); // applicant, company
             table.string("action"); // approved, rejected, applied
             table.boolean("read");
  
@@ -85,7 +84,9 @@ export async function up(knex: Knex): Promise<void> {
 
 export async function down(knex: Knex): Promise<void> {
     return knex.schema
-        .dropTable("thread")
+        .dropTable("notification")
+        .dropTable("application")
+        .dropTable("job")
         .dropTable("topic")
         .dropTable("profile")
         .dropTable("account");
