@@ -6,7 +6,7 @@ export async function up(knex: Knex): Promise<void> {
             table.increments("id").primary().notNullable();
             table.string("email").notNullable();
             table.string("password");
-            table.string("role"); // user, applicant, company, admin
+            table.string("role"); // user, candidate, company, admin
 
             table.datetime("created_at").defaultTo(knex.fn.now());
             table.datetime("updated_at");
