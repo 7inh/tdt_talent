@@ -43,6 +43,7 @@ export async function up(knex: Knex): Promise<void> {
             table.string("attach_jd");
             table.integer("salary");
             table.string("location");
+            table.string("position");
             table.string("employment_type"); // fulltime, part-time, remote, internship
             table.integer("experiment_requirement");
 
