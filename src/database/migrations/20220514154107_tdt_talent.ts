@@ -27,7 +27,7 @@ export async function up(knex: Knex): Promise<void> {
             table.datetime("updated_at");
             table.datetime("deleted_at");
         })
-        .createTable("topic", (table) => {
+        .createTable("position", (table) => {
             table.increments("id").primary().notNullable();
 
             table.string("title");
@@ -36,7 +36,7 @@ export async function up(knex: Knex): Promise<void> {
         .createTable("job", (table) => {
             table.increments("id").primary().notNullable();
             table.integer("account_id").references("account.id").onDelete('CASCADE').onUpdate('CASCADE');
-            table.integer("topic_id").references("topic.id").onDelete('SET NULL').onUpdate('CASCADE');
+            table.integer("position_id").references("position.id").onDelete('SET NULL').onUpdate('CASCADE');
 
             table.string("title");
             table.text("description");
@@ -71,7 +71,7 @@ export async function up(knex: Knex): Promise<void> {
             table.increments("id").primary().notNullable();
             table.integer("from").references("account.id").onDelete('CASCADE').onUpdate('CASCADE');
             table.integer("to").references("account.id").onDelete('CASCADE').onUpdate('CASCADE');
-            table.integer("topic_id").references("topic.id").onDelete('SET NULL').onUpdate('CASCADE');
+            table.integer("position_id").references("position.id").onDelete('SET NULL').onUpdate('CASCADE');
 
             table.string("action"); // approved, rejected, applied
             table.boolean("read").defaultTo(false);
@@ -87,7 +87,7 @@ export async function down(knex: Knex): Promise<void> {
         .dropTable("notification")
         .dropTable("application")
         .dropTable("job")
-        .dropTable("topic")
+        .dropTable("position")
         .dropTable("profile")
         .dropTable("account");
 }

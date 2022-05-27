@@ -1,12 +1,12 @@
 import account from "./account";
 import profile from "./profile";
-import topic from "./topic";
+import position from "./position";
 import express from "express";
 
 const api = express.Router();
 
 api.use("/account", account);
 api.use("/profile", profile);
-api.use("/topic", topic);
+api.use("/position", position);
 
 export default api;
