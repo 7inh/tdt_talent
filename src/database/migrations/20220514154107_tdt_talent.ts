@@ -71,7 +71,7 @@ export async function up(knex: Knex): Promise<void> {
             table.increments("id").primary().notNullable();
             table.integer("from").references("account.id").onDelete('CASCADE').onUpdate('CASCADE');
             table.integer("to").references("account.id").onDelete('CASCADE').onUpdate('CASCADE');
-            table.integer("job_id").references("job.id").onDelete('SET NULL').onUpdate('CASCADE');
+            table.integer("job_id").references("job.id").onDelete('CASCADE').onUpdate('CASCADE');
 
             table.string("action"); // approved, rejected, applied
             table.boolean("read").defaultTo(false);
