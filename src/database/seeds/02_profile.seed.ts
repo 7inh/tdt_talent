@@ -14,6 +14,6 @@ export async function seed(knex: Knex): Promise<void> {
         {account_id: 6, full_name: "Le Thanh Long", phone_number: "0343457364", address: "TP Ho Chi Minh", description :"Flutter "},
         {account_id: 7, full_name: "Hoang Van Thu", phone_number: "0986545637", address: "Ha Noi", description :"Fullstack Developer"},
         {account_id: 8, full_name: "Nguyen Quoc Dan", phone_number: "0278536478", address: "Ha Noi", description :"UX Research"},
-        {account_id: 9, full_name: "Mai hong Hac", phone_number: "0948576644", address: "TP Ho Chi Minh", description :""},
+        {account_id: 9, full_name: "Mai hong Hac", phone_number: "0948576644", address: "TP Ho Chi Minh", description :"Tester"},
     ]);
 }
