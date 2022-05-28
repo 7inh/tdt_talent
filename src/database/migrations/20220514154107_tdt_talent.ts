@@ -23,6 +23,11 @@ export async function up(knex: Knex): Promise<void> {
             table.text("description");
             table.string("attach_resume");
 
+            table.string("website")
+            table.string("contact_mail")
+            table.string("country")
+            table.string("city")
+
             table.datetime("created_at").defaultTo(knex.fn.now());
             table.datetime("updated_at");
             table.datetime("deleted_at");
