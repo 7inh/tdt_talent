@@ -11,7 +11,7 @@ const AccountService = {
         createAccount: async (account: Pick<Account, "email" | "role">) => {
             const trx = await database.transaction();
             try {
-                const newCreatedAccount = await createAccount(trx, account);
+                const [newCreatedAccount] = await createAccount(trx, account);
                 trx.commit();
 
                 return newCreatedAccount;
