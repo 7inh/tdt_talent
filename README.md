@@ -37,3 +37,8 @@ Create data value
 ```
 knex seed:run
 ```
+### Run 
+```
+yarn 
+yarn dev
+```
