@@ -6,8 +6,6 @@ const JobController = {
     getAllJob: async (_req: express.Request, res: express.Response, next: express.NextFunction) => {
         try {
             const jobsDatabase = await JobService.query.getAllJob();
-            console.log('get all jobs', jobsDatabase)
-            
 
             return res.status(SUCCESS_DETAIL[SUCCESS_MESSAGE.OK].status).json(jobsDatabase);
         } catch (error) {
