@@ -7,7 +7,7 @@ import dotenv from "dotenv";
 dotenv.config();
 
 import routes from "./routes";
-import Handler from "./utils/handler";
+// import Handler from "./utils/handler";
 
 const app: Express = express();
 const port = process.env.PORT || 3000;
@@ -20,7 +20,7 @@ app.use(express.urlencoded({ limit: "50mb", extended: true }));
 app.use("/public", express.static(path.resolve(__dirname, "../public")));
 app.use("/", routes);
 
-app.use(Handler.errorHandler)
+// app.use(Handler.errorHandler)
 
 app.listen(port, () => {
     return console.log(`Server is listening at http://localhost:${port}`);
