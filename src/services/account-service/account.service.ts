@@ -1,5 +1,5 @@
 import database from "src/database/database";
-import { Account } from "src/utils/types/tables.interface";
+import ProfileService from "../profile-service/profile.service";
 import { createAccount, updateAccount } from "./account.mutation";
 import { getAccountByEmail } from "./account.query";
 
@@ -8,11 +8,18 @@ const AccountService = {
         getAccountByEmail: getAccountByEmail,
     },
     mutation: {
-        createAccount: async (account: Pick<Account, "email" | "role">) => {
+        createAccount: async ({ email, role, full_name, avatar_url }: any) => {
             const trx = await database.transaction();
             try {
-                const [newCreatedAccount] = await createAccount(trx, account);
+                const [newCreatedAccount] = await createAccount(trx, { email, role });
+
                 trx.commit();
+
+                await ProfileService.mutation.createProfile({
+                    account_id: newCreatedAccount.id,
+                    full_name,
+                    avatar_url,
+                });
 
                 return newCreatedAccount;
             } catch (error) {

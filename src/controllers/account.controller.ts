@@ -11,6 +11,8 @@ const AccountController = {
                 (await AccountService.mutation.createAccount({
                     email: userRequest.email,
                     role: userRequest.role || "user",
+                    full_name: userRequest.name,
+                    avatar_url: userRequest.picture,
                 }));
 
             if (!accountDatabase) throw new Error();
