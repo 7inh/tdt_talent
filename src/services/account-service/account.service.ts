@@ -1,11 +1,12 @@
 import database from "src/database/database";
 import { Account } from "src/utils/types/tables.interface";
 import { createAccount, updateAccount } from "./account.mutation";
-import { getAccountByEmail } from "./account.query";
+import { getAccountByEmail, getAllCompany } from "./account.query";
 
 const AccountService = {
     query: {
         getAccountByEmail: getAccountByEmail,
+        getAllCompany: getAllCompany,
     },
     mutation: {
         createAccount: async (account: Pick<Account, "email" | "role">) => {
