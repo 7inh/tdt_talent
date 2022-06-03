@@ -24,12 +24,23 @@ const AccountController = {
             return next(new Error(ERROR_MESSAGE.BAD_REQUEST));
         }
     },
-    getAllCompany: async (_req: express.Request, res: express.Response, next: express.NextFunction) => {
+    getAllCompany: async (
+        _req: express.Request,
+        res: express.Response,
+        next: express.NextFunction
+    ) => {
         try {
             const allCompany = await AccountService.query.getAllCompany();
-            return res
-                .status(SUCCESS_DETAIL[SUCCESS_MESSAGE.OK].status)
-                .json(allCompany);
+            return res.status(SUCCESS_DETAIL[SUCCESS_MESSAGE.OK].status).json(allCompany);
+        } catch (error) {
+            return next(new Error(ERROR_MESSAGE.BAD_REQUEST));
+        }
+    },
+    getProfile: async (req: express.Request, res: express.Response, next: express.NextFunction) => {
+        try {
+            const userRequest = req.body.user;
+            const [profileDatabase] = await AccountService.query.getProfile(userRequest.id);
+            return res.status(SUCCESS_DETAIL[SUCCESS_MESSAGE.OK].status).json(profileDatabase);
         } catch (error) {
             return next(new Error(ERROR_MESSAGE.BAD_REQUEST));
         }

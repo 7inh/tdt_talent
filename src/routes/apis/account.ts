@@ -7,5 +7,6 @@ const account = express.Router();
 account.get("/login", MiddleWare.auth, AccountController.login);
 account.post("/update", MiddleWare.auth, AccountController.updateAccount);
 account.get("/get_all_company", AccountController.getAllCompany);
+account.get("/profile", MiddleWare.auth, AccountController.getProfile);
 
 export default account;
