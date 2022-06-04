@@ -1,13 +1,12 @@
 import database from "src/database/database";
 import ProfileService from "../profile-service/profile.service";
 import { createAccount, updateAccount } from "./account.mutation";
-import { getAccountByEmail, getAllCompany, getProfile } from "./account.query";
+import { getAccountByEmail, getAllCompany } from "./account.query";
 
 const AccountService = {
     query: {
         getAccountByEmail: getAccountByEmail,
         getAllCompany: getAllCompany,
-        getProfile: getProfile,
     },
     mutation: {
         createAccount: async ({ email, role, full_name, avatar_url }: any) => {

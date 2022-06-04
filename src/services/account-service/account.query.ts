@@ -16,10 +16,3 @@ export async function getAllCompany() {
         .join("profile", "profile.account_id", "account.id")
         .where({ role: "company" });
 }
-
-export async function getProfile(account_id: number) {
-    return await database("account")
-        .select("*")
-        .join("profile", "profile.account_id", "account.id")
-        .where({ account_id });
-}
