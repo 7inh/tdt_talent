@@ -15,18 +15,18 @@ const JobController = {
     upsertJob: async (req: express.Request, res: express.Response, next: express.NextFunction) => {
         try {
             const userRequest = req.body.user;
-            const jobRequest = req.body.job;
-            const action = jobRequest.action;
+            const jobPayload = req.body.job;
+            const action = jobPayload.action || "create";
 
-            const requestUpdate = {
+            const jobRequest = {
+                ...jobPayload,
                 account_id: userRequest.id,
-                ...jobRequest
-            }
+            };
 
             const jobDatabase =
                 action === "update"
-                    ? await JobService.mutation.updateJob(requestUpdate)
-                    : await JobService.mutation.createJob(requestUpdate);
+                    ? await JobService.mutation.updateJob(jobRequest)
+                    : await JobService.mutation.createJob(jobRequest);
 
             return res.status(SUCCESS_DETAIL[SUCCESS_MESSAGE.CREATED].status).json(jobDatabase);
         } catch (e) {
