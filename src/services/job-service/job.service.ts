@@ -15,6 +15,7 @@ const JobService = {
 
                 return newCreatedJob;
             } catch (error) {
+                console.error(error);
                 trx.rollback();
                 throw error;
             }
