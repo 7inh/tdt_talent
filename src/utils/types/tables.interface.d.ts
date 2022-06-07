@@ -13,6 +13,7 @@ export interface Profile {
     account_id: number;
     full_name: string;
     avatar_url: string;
+    contact_mail: string;
     phone_number?: string;
     address?: string;
     description?: string;

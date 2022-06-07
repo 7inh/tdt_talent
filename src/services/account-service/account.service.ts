@@ -20,6 +20,7 @@ const AccountService = {
                     account_id: newCreatedAccount.id,
                     full_name,
                     avatar_url,
+                    contact_mail: email,
                 });
 
                 return newCreatedAccount;
