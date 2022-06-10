@@ -1,10 +1,11 @@
 import database from "src/database/database";
 import { createJob } from "./job.mutation";
-import { getAllJob } from "./job.query";
+import { getAllJob, getDetail } from "./job.query";
 
 const JobService = {
     query: {
         getAllJob: getAllJob,
+        getDetail: getDetail,
     },
     mutation: {
         createJob: async (job: any) => {

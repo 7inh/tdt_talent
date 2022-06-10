@@ -12,6 +12,17 @@ const JobController = {
             return next(new Error(ERROR_MESSAGE.BAD_REQUEST));
         }
     },
+    getDetail: async (req: express.Request, res: express.Response, next: express.NextFunction) => {
+        try {
+            const { id: jobId } = req.params || req.query;
+            const [jobsDatabase] = await JobService.query.getDetail(parseInt(jobId));
+
+            return res.status(SUCCESS_DETAIL[SUCCESS_MESSAGE.OK].status).json(jobsDatabase);
+        } catch (error) {
+            console.log(error);
+            return next(new Error(ERROR_MESSAGE.BAD_REQUEST));
+        }
+    },
     upsertJob: async (req: express.Request, res: express.Response, next: express.NextFunction) => {
         try {
             const userRequest = req.body.user;
