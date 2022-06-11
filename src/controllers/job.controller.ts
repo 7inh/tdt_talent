@@ -12,6 +12,21 @@ const JobController = {
             return next(new Error(ERROR_MESSAGE.BAD_REQUEST));
         }
     },
+    getByCompany: async (
+        req: express.Request,
+        res: express.Response,
+        next: express.NextFunction
+    ) => {
+        try {
+            const userRequest = req.body.user;
+            const jobsDatabase = await JobService.query.getByCompany(userRequest.id);
+
+            return res.status(SUCCESS_DETAIL[SUCCESS_MESSAGE.OK].status).json(jobsDatabase);
+        } catch (error) {
+            console.log(error);
+            return next(new Error(ERROR_MESSAGE.BAD_REQUEST));
+        }
+    },
     getDetail: async (req: express.Request, res: express.Response, next: express.NextFunction) => {
         try {
             const { id: jobId } = req.params || req.query;

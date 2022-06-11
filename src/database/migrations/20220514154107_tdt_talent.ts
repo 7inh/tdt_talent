@@ -63,10 +63,11 @@ export async function up(knex: Knex): Promise<void> {
         })
         .createTable("application", (table) => {
             table.increments("id").primary().notNullable();
-            table.integer("applicant").references("account.id").onDelete('CASCADE').onUpdate('CASCADE');
-            table.integer("company").references("account.id").onDelete('CASCADE').onUpdate('CASCADE');
+            table.integer("job_id").references("job.id").onDelete('CASCADE').onUpdate('CASCADE');
+            table.integer("candidate_id").references("account.id").onDelete('CASCADE').onUpdate('CASCADE');
+            table.integer("company_id").references("account.id").onDelete('CASCADE').onUpdate('CASCADE');
 
-            table.string("state"); // approved, rejected, pending
+            table.string("state").defaultTo("pending"); // approved, rejected, pending
 
             table.datetime("created_at").defaultTo(knex.fn.now());
             table.datetime("updated_at");

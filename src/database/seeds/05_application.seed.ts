@@ -6,17 +6,11 @@ export async function seed(knex: Knex): Promise<void> {
 
     // Inserts seed entries
     await knex("application").insert([
-        { applicant: 3, company: 9, state: "reject"},
-        { applicant: 4, company: 9, state: "approve"},
-        { applicant: 6, company: 9, state: "reject"},
-        { applicant: 7, company: 2, state: "approve"},
-        { applicant: 3, company: 9, state: "reject"},
-        { applicant: 4, company: 2, state: "reject"},
-        { applicant: 3, company: 2, state: "reject"},
-        { applicant: 2, company: 9, state: "approve"},
-        { applicant: 5, company: 9, state: "approve"},
-        { applicant: 6, company: 2, state: "reject"},
-        { applicant: 7, company: 2, state: "reject"},
-        { applicant: 3, company: 9, state: "approve"},
+        { job_id: 2, candidate_id: 3, company_id: 9, state: "reject" },
+        { job_id: 2, candidate_id: 4, company_id: 9, state: "approve" },
+        { job_id: 2, candidate_id: 6, company_id: 9, state: "reject" },
+        { job_id: 2, candidate_id: 7, company_id: 2, state: "approve" },
+        { job_id: 2, candidate_id: 3, company_id: 9, state: "reject" },
+        { job_id: 2, candidate_id: 4, company_id: 2, state: "reject" },
     ]);
 }

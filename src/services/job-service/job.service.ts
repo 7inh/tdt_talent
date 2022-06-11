@@ -1,10 +1,11 @@
 import database from "src/database/database";
 import { createJob } from "./job.mutation";
-import { getAllJob, getDetail } from "./job.query";
+import { getAllJob, getByCompany, getDetail } from "./job.query";
 
 const JobService = {
     query: {
         getAllJob: getAllJob,
+        getByCompany: getByCompany,
         getDetail: getDetail,
     },
     mutation: {
