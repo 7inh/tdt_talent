@@ -45,7 +45,7 @@ const AccountController = {
             const userRequest = req.body.user;
             const { role } = req.params || req.query;
 
-            if (!userRequest ||  !role) throw new Error();
+            if (!userRequest ||  !role || !["candidate", "company"].includes(role)) throw new Error();
 
             const accountDatabase = await AccountService.mutation.updateAccount({
                 id: userRequest.id,
