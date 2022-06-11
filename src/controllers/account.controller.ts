@@ -43,13 +43,13 @@ const AccountController = {
     ) => {
         try {
             const userRequest = req.body.user;
-            userRequest.role = req.body.role;
+            const { role } = req.params || req.query;
 
-            if (!userRequest) throw new Error();
+            if (!userRequest ||  !role) throw new Error();
 
             const accountDatabase = await AccountService.mutation.updateAccount({
                 id: userRequest.id,
-                role: userRequest.role || "user",
+                role: role,
             });
 
             return res
