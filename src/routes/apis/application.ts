@@ -5,5 +5,6 @@ import MiddleWare from "src/utils/middleware";
 const application = express.Router();
 
 application.get("/get_by_company", MiddleWare.auth, ApplicationController.getByCompany);
+application.get("/get_by_candidate", MiddleWare.auth, ApplicationController.getByCandidate);
 
 export default application;

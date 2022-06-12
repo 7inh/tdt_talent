@@ -4,7 +4,7 @@ import JobController from "src/controllers/job.controller";
 
 const job = express.Router();
 
-job.get("/get", MiddleWare.auth, JobController.getAllJob);
+job.get("/get", JobController.getAllJob);
 job.get("/get_by_company", MiddleWare.auth, JobController.getByCompany);
 job.get("/get_detail/:id", MiddleWare.auth, JobController.getDetail);
 

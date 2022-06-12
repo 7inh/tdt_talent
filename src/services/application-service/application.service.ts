@@ -1,8 +1,9 @@
-import { getByCompany } from "./application.query";
+import { getByCandidate, getByCompany } from "./application.query";
 
 const ApplicationService = {
     query: {
         getByCompany: getByCompany,
+        getByCandidate: getByCandidate,
     },
     mutation: {},
 };
