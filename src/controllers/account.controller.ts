@@ -24,6 +24,14 @@ const AccountController = {
             return next(new Error(ERROR_MESSAGE.BAD_REQUEST));
         }
     },
+    getAll: async (_req: express.Request, res: express.Response, next: express.NextFunction) => {
+        try {
+            const allCompany = await AccountService.query.getAll();
+            return res.status(SUCCESS_DETAIL[SUCCESS_MESSAGE.OK].status).json(allCompany);
+        } catch (error) {
+            return next(new Error(ERROR_MESSAGE.BAD_REQUEST));
+        }
+    },
     getAllCompany: async (
         _req: express.Request,
         res: express.Response,
@@ -45,7 +53,8 @@ const AccountController = {
             const userRequest = req.body.user;
             const { role } = req.params || req.query;
 
-            if (!userRequest ||  !role || !["candidate", "company"].includes(role)) throw new Error();
+            if (!userRequest || !role || !["candidate", "company"].includes(role))
+                throw new Error();
 
             const accountDatabase = await AccountService.mutation.updateAccount({
                 id: userRequest.id,

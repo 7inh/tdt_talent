@@ -10,6 +10,13 @@ export async function getAccountByEmail(email: string) {
         .first();
 }
 
+export async function getAll() {
+    return await database("account")
+        .select("*")
+        .join("profile", "profile.account_id", "account.id")
+        .orderBy("account.created_at", "desc");
+}
+
 export async function getAllCompany() {
     return await database("account")
         .select("*")
