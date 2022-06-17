@@ -33,6 +33,29 @@ const ApplicationController = {
             return next(new Error(ERROR_MESSAGE.BAD_REQUEST));
         }
     },
+    applyJob: async (req: express.Request, res: express.Response, next: express.NextFunction) => {
+        try {
+            const userRequest = req.body.user;
+            const payload = req.body.application;
+
+            console.log(payload)
+
+            const applicationRequest = {
+                ...payload,
+                candidate_id: userRequest.id,
+            };
+
+            const applicationResponse = await ApplicationService.mutation.applyJob(
+                applicationRequest
+            );
+
+            return res
+                .status(SUCCESS_DETAIL[SUCCESS_MESSAGE.CREATED].status)
+                .json(applicationResponse);
+        } catch (e) {
+            return next(new Error(ERROR_MESSAGE.BAD_REQUEST));
+        }
+    },
 };
 
 export default ApplicationController;

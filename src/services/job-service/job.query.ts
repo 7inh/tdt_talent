@@ -3,7 +3,9 @@ import database from "src/database/database";
 export async function getAllJob() {
     return await database("job")
         .select({
+            id: "job.id",
             title: "job.title",
+            company_id: "profile.account_id",
             company_name: "profile.full_name",
             company_avatar: "profile.avatar_url",
             created_at: "job.created_at",

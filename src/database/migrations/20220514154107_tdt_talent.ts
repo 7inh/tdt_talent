@@ -55,7 +55,7 @@ export async function up(knex: Knex): Promise<void> {
             table.datetime("expire_date");
             table.integer("candidate_limit");
 
-            table.string("state"); // active, pending, rejected, expired
+            table.string("state").defaultTo("pending"); // active, pending, rejected, expired
 
             table.datetime("created_at").defaultTo(knex.fn.now());
             table.datetime("updated_at");
@@ -67,6 +67,7 @@ export async function up(knex: Knex): Promise<void> {
             table.integer("candidate_id").references("account.id").onDelete('CASCADE').onUpdate('CASCADE');
             table.integer("company_id").references("account.id").onDelete('CASCADE').onUpdate('CASCADE');
 
+            table.string("cover_letter").defaultTo("pending"); // approved, rejected, pending
             table.string("state").defaultTo("pending"); // approved, rejected, pending
 
             table.datetime("created_at").defaultTo(knex.fn.now());
