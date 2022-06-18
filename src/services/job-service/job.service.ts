@@ -1,5 +1,5 @@
 import database from "src/database/database";
-import { createJob } from "./job.mutation";
+import { createJob, setJobState } from "./job.mutation";
 import { getAllJob, getByCompany, getDetail } from "./job.query";
 
 const JobService = {
@@ -17,7 +17,6 @@ const JobService = {
 
                 return newCreatedJob;
             } catch (error) {
-                console.error(error);
                 trx.rollback();
                 throw error;
             }
@@ -29,6 +28,18 @@ const JobService = {
                 trx.commit();
 
                 return newCreatedJob;
+            } catch (error) {
+                trx.rollback();
+                throw error;
+            }
+        },
+        setJobState: async (job: any) => {
+            const trx = await database.transaction();
+            try {
+                const [updatedJob] = await setJobState(trx, job);
+                trx.commit();
+
+                return updatedJob;
             } catch (error) {
                 trx.rollback();
                 throw error;

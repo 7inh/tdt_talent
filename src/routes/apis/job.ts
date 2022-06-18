@@ -9,5 +9,6 @@ job.get("/get_by_company", MiddleWare.auth, JobController.getByCompany);
 job.get("/get_detail/:id", MiddleWare.auth, JobController.getDetail);
 
 job.post("/upsert", MiddleWare.auth, JobController.upsertJob);
+job.post("/set_state", MiddleWare.auth, JobController.setJobState);
 
 export default job;

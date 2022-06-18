@@ -11,6 +11,7 @@ export async function getAllJob() {
             created_at: "job.created_at",
             location: "job.location",
             position: "position.title",
+            state: "job.state",
             employment_type: "job.employment_type",
         })
         .join("profile", "profile.account_id", "job.account_id")

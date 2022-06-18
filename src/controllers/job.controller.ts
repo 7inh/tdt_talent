@@ -59,6 +59,24 @@ const JobController = {
             return next(new Error(ERROR_MESSAGE.BAD_REQUEST));
         }
     },
+    setJobState: async (req: express.Request, res: express.Response, next: express.NextFunction) => {
+        try {
+            const userRequest = req.body.user;
+            const jobPayload = req.body.job;
+
+            const jobRequest = {
+                ...jobPayload,
+                account_id: userRequest.id,
+            };
+
+            const jobUpdated = await JobService.mutation.setJobState(jobRequest)
+
+            return res.status(SUCCESS_DETAIL[SUCCESS_MESSAGE.CREATED].status).json(jobUpdated);
+        } catch (error) {
+            console.error(error);
+            return next(new Error(ERROR_MESSAGE.BAD_REQUEST));
+        }
+    },
 };
 
 export default JobController;

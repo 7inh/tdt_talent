@@ -1,11 +1,21 @@
 import { Knex } from "knex";
 import database from "src/database/database";
 
-export async function createJob(
-    trx: Knex.Transaction<any, any[]>,
-    job: any
-) {
+export async function createJob(trx: Knex.Transaction<any, any[]>, job: any) {
     return await database("job").transacting(trx).insert(job).returning("*");
+}
+
+export async function setJobState(trx: Knex.Transaction<any, any[]>, job: any) {
+    return await database("job")
+        .transacting(trx)
+        .update({
+            state: job.state,
+            updated_at: new Date(),
+        })
+        .where({
+            id: job.id,
+        })
+        .returning("*");
 }
 
 // export async function updateJob(
