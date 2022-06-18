@@ -38,8 +38,6 @@ const ApplicationController = {
             const userRequest = req.body.user;
             const payload = req.body.application;
 
-            console.log(payload)
-
             const applicationRequest = {
                 ...payload,
                 candidate_id: userRequest.id,
