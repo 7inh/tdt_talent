@@ -8,5 +8,6 @@ application.get("/get_by_company", MiddleWare.auth, ApplicationController.getByC
 application.get("/get_by_candidate", MiddleWare.auth, ApplicationController.getByCandidate);
 
 application.post("/apply_job", MiddleWare.auth, ApplicationController.applyJob);
+application.post("/set_state", MiddleWare.auth, ApplicationController.setApplicationState);
 
 export default application;

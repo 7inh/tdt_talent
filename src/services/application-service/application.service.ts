@@ -1,5 +1,5 @@
 import database from "src/database/database";
-import { applyJob } from "./application.mutation";
+import { applyJob, setApplicationState } from "./application.mutation";
 import { getByCandidate, getByCompany } from "./application.query";
 
 const ApplicationService = {
@@ -21,6 +21,18 @@ const ApplicationService = {
                 trx.commit();
 
                 return applyJobReturning;
+            } catch (error) {
+                trx.rollback();
+                throw error;
+            }
+        },
+        setApplicationState: async (application: any) => {
+            const trx = await database.transaction();
+            try {
+                const [updatedApplication] = await setApplicationState(trx, application);
+                trx.commit();
+
+                return updatedApplication;
             } catch (error) {
                 trx.rollback();
                 throw error;
