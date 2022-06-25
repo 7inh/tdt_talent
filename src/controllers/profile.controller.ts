@@ -14,8 +14,18 @@ const ProfileController = {
             const profileDatabase = await ProfileService.query.getProfileByAccountId(
                 userRequest.id
             );
+
+            console.log({
+                ...profileRequest,
+                account_id: userRequest.id,
+            });
+
             const profileUpdated = profileDatabase
-                ? await ProfileService.mutation.updateProfile({...profileDatabase, ...profileRequest})
+                ? await ProfileService.mutation.updateProfile({
+                      ...profileDatabase,
+                      ...profileRequest,
+                      account_id: userRequest.id,
+                  })
                 : await ProfileService.mutation.createProfile({
                       ...profileRequest,
                       account_id: userRequest.id,
