@@ -4,6 +4,7 @@ import position from "./position";
 import job from "./job";
 import notification from "./notification";
 import application from "./application";
+import file from "./file";
 import express from "express";
 
 const api = express.Router();
@@ -14,5 +15,6 @@ api.use("/position", position);
 api.use("/job", job);
 api.use("/notification", notification);
 api.use("/application", application);
+api.use("/file", file);
 
 export default api;
