@@ -1,4 +1,5 @@
 import database from "src/database/database";
+import NotificationService from "../notification-service/notification.service";
 import { applyJob, setApplicationState } from "./application.mutation";
 import { getByCandidate, getByCompany } from "./application.query";
 
@@ -9,7 +10,7 @@ const ApplicationService = {
     },
     mutation: {
         applyJob: async ({ job_id, candidate_id, company_id, state }: any) => {
-            const trx = await database.transaction();
+            const trx = await database.transaction(); 
             try {
                 const [applyJobReturning] = await applyJob(trx, {
                     job_id,
@@ -17,6 +18,13 @@ const ApplicationService = {
                     company_id,
                     state,
                 });
+
+                NotificationService.mutation.createNotification({
+                    from: candidate_id,
+                    to: company_id,
+                    job_id: job_id,
+                    action: "applied"
+                })
 
                 trx.commit();
 
