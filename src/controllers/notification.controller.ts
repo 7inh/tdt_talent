@@ -21,6 +21,7 @@ const NotificationController = {
                 .status(SUCCESS_DETAIL[SUCCESS_MESSAGE.OK].status)
                 .json(notificationDatabase);
         } catch (error) {
+            console.error(error);
             return next(new Error(ERROR_MESSAGE.BAD_REQUEST));
         }
     },
