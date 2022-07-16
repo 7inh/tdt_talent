@@ -54,21 +54,32 @@ const ApplicationController = {
             return next(new Error(ERROR_MESSAGE.BAD_REQUEST));
         }
     },
-    setApplicationState: async (req: express.Request, res: express.Response, next: express.NextFunction) => {
+    setApplicationState: async (
+        req: express.Request,
+        res: express.Response,
+        next: express.NextFunction
+    ) => {
         try {
             const userRequest = req.body.user;
             const applicationPayload = req.body.application;
 
+            const databaseApplication = await ApplicationService.query.getById(
+                applicationPayload.id
+            );
+
             const applicationRequest = {
+                ...databaseApplication,
                 ...applicationPayload,
                 company_id: userRequest.id,
             };
 
-            console.log(applicationRequest)
+            const applicationUpdated = await ApplicationService.mutation.setApplicationState(
+                applicationRequest
+            );
 
-            const applicationUpdated = await ApplicationService.mutation.setApplicationState(applicationRequest)
-
-            return res.status(SUCCESS_DETAIL[SUCCESS_MESSAGE.CREATED].status).json(applicationUpdated);
+            return res
+                .status(SUCCESS_DETAIL[SUCCESS_MESSAGE.CREATED].status)
+                .json(applicationUpdated);
         } catch (error) {
             console.error(error);
             return next(new Error(ERROR_MESSAGE.BAD_REQUEST));
