@@ -22,6 +22,7 @@ export async function up(knex: Knex): Promise<void> {
             table.string("address");
             table.text("description");
             table.string("attach_resume");
+            table.text("attach_resume_url");
 
             table.string("website")
             table.string("contact_mail")
