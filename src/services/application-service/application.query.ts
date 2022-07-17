@@ -29,6 +29,8 @@ export async function getByCompany(id: number) {
             candidate_name: "profile.full_name",
             candidate_avatar: "profile.avatar_url",
             candidate_address: "profile.address",
+            candidate_resume: "profile.attach_resume",
+            candidate_resume_url: "profile.attach_resume_url",
         })
         .join("job", "application.job_id", "job.id")
         .join("profile", "profile.account_id", "application.candidate_id")
