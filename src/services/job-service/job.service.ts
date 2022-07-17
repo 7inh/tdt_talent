@@ -1,4 +1,5 @@
 import database from "src/database/database";
+import NotificationService from "../notification-service/notification.service";
 import { createJob, setJobState } from "./job.mutation";
 import { getAllJob, getByCompany, getDetail } from "./job.query";
 
@@ -37,6 +38,14 @@ const JobService = {
             const trx = await database.transaction();
             try {
                 const [updatedJob] = await setJobState(trx, job);
+
+                NotificationService.mutation.createNotification({
+                    from: job.approver,
+                    to: updatedJob.account_id,
+                    job_id: job.id,
+                    action: job.state,
+                });
+
                 trx.commit();
 
                 return updatedJob;
