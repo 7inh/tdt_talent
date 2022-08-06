@@ -1,11 +1,12 @@
 import database from "src/database/database";
 import ProfileService from "../profile-service/profile.service";
 import { createAccount, updateAccount } from "./account.mutation";
-import { getAccountByEmail, getAll, getAllCompany } from "./account.query";
+import { getAccountByEmail, getAll, getAllCompany, getDetail } from "./account.query";
 
 const AccountService = {
     query: {
         getAccountByEmail: getAccountByEmail,
+        getDetail: getDetail,
         getAll: getAll,
         getAllCompany: getAllCompany,
     },

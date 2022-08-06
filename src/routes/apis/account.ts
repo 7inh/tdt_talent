@@ -6,6 +6,7 @@ const account = express.Router();
 
 account.get("/login", MiddleWare.auth, AccountController.login);
 
+account.get("/get_detail/:id", MiddleWare.auth, AccountController.getDetail);
 account.get("/get_all", AccountController.getAll);
 account.get("/get_all_company", AccountController.getAllCompany);
 

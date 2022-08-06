@@ -10,6 +10,21 @@ export async function getAccountByEmail(email: string) {
         .first();
 }
 
+export async function getDetail(account_id: number) {
+    return await database("profile")
+        .select({
+            full_name: "profile.full_name",
+            avatar_url: "profile.avatar_url",
+            country: "profile.country",
+            address: "profile.address",
+            description: "profile.description",
+            phone_number: "profile.phone_number",
+            contact_mail: "profile.contact_mail",
+            website: "profile.website",
+        })
+        .where({ "profile.account_id": account_id });
+}
+
 export async function getAll() {
     return await database("account")
         .select("*")

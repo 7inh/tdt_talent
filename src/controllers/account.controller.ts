@@ -24,6 +24,17 @@ const AccountController = {
             return next(new Error(ERROR_MESSAGE.BAD_REQUEST));
         }
     },
+    getDetail: async (req: express.Request, res: express.Response, next: express.NextFunction) => {
+        try {
+            const { id: accountId } = req.params || req.query;
+            const [accountsDatabase] = await AccountService.query.getDetail(parseInt(accountId));
+
+            return res.status(SUCCESS_DETAIL[SUCCESS_MESSAGE.OK].status).json(accountsDatabase);
+        } catch (error) {
+            console.log(error);
+            return next(new Error(ERROR_MESSAGE.BAD_REQUEST));
+        }
+    },
     getAll: async (_req: express.Request, res: express.Response, next: express.NextFunction) => {
         try {
             const allCompany = await AccountService.query.getAll();
