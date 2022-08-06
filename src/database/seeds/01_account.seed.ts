@@ -6,6 +6,7 @@ export async function seed(knex: Knex): Promise<void> {
 
     // Inserts seed entries
     await knex("account").insert([
+        { email: "meobong1120@gmail.com", password: "", role: "admin" },
         { email: process.env.TEST_USER, password: "1234567890", role: "user" },
         { email: "lamlam@example.com", password: "1234567890", role: "company" },
         { email: "miumiu@example.com", password: "1234567890", role: "candidate" },
