@@ -1,11 +1,13 @@
 import database from "src/database/database";
 import NotificationService from "../notification-service/notification.service";
 import { createJob, setJobState } from "./job.mutation";
-import { getAllJob, getByCompany, getDetail } from "./job.query";
+import { getAllJob, getByCompany, getDetail, getJobTotal, getPerPage } from "./job.query";
 
 const JobService = {
     query: {
+        getJobTotal: getJobTotal,
         getAllJob: getAllJob,
+        getPerPage: getPerPage,
         getByCompany: getByCompany,
         getDetail: getDetail,
     },

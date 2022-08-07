@@ -3,9 +3,28 @@ import JobService from "src/services/job-service/job.service";
 import { ERROR_MESSAGE, SUCCESS_DETAIL, SUCCESS_MESSAGE } from "src/utils/definitions";
 
 const JobController = {
+    getJobTotal: async (_req: express.Request, res: express.Response, next: express.NextFunction) => {
+        try {
+            const [totalJob] = await JobService.query.getJobTotal();
+
+            return res.status(SUCCESS_DETAIL[SUCCESS_MESSAGE.OK].status).json(totalJob);
+        } catch (error) {
+            return next(new Error(ERROR_MESSAGE.BAD_REQUEST));
+        }
+    },
     getAllJob: async (_req: express.Request, res: express.Response, next: express.NextFunction) => {
         try {
             const jobsDatabase = await JobService.query.getAllJob();
+
+            return res.status(SUCCESS_DETAIL[SUCCESS_MESSAGE.OK].status).json(jobsDatabase);
+        } catch (error) {
+            return next(new Error(ERROR_MESSAGE.BAD_REQUEST));
+        }
+    },
+    getPerPage: async (req: express.Request, res: express.Response, next: express.NextFunction) => {
+        try {
+            const { page } = req.params || req.query;
+            const jobsDatabase = await JobService.query.getPerPage(parseInt(page));
 
             return res.status(SUCCESS_DETAIL[SUCCESS_MESSAGE.OK].status).json(jobsDatabase);
         } catch (error) {
