@@ -63,6 +63,7 @@ export async function getDetail(job_id: number) {
     return await database("job")
         .select({
             title: "job.title",
+            company_id: "profile.account_id",
             company_name: "profile.full_name",
             employment_type: "job.employment_type",
             created_at: "job.created_at",
@@ -72,6 +73,7 @@ export async function getDetail(job_id: number) {
             position: "position.title",
             experience_requirement: "job.experience_requirement",
             description: "job.description",
+            candidates: database("application").countDistinct(["application.job_id", "application.candidate_id"]).whereRaw('?? = ??', ['job.id', 'application.job_id'])
         })
         .join("profile", "profile.account_id", "job.account_id")
         .join("position", "position.id", "job.position_id")
