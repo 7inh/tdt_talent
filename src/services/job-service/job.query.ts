@@ -35,6 +35,7 @@ export async function getPerPage(page: number) {
             location: "job.location",
             position: "position.title",
             state: "job.state",
+            salary: "job.salary",
             employment_type: "job.employment_type",
         })
         .offset((page - 1) * 3)

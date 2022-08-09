@@ -21,6 +21,7 @@ const AccountController = {
                 .status(SUCCESS_DETAIL[SUCCESS_MESSAGE.OK].status)
                 .json({ ...userRequest, ...accountDatabase });
         } catch (e) {
+            console.error(e);
             return next(new Error(ERROR_MESSAGE.BAD_REQUEST));
         }
     },

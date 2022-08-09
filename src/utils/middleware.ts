@@ -51,6 +51,7 @@ const MiddleWare = {
 
             throw Error;
         } catch (e) {
+            console.error(e);
             return next(new Error(ERROR_MESSAGE.BAD_REQUEST));
         }
     },
