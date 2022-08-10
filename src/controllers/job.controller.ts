@@ -31,6 +31,17 @@ const JobController = {
             return next(new Error(ERROR_MESSAGE.BAD_REQUEST));
         }
     },
+    getPerPageWithFilter: async (req: express.Request, res: express.Response, next: express.NextFunction) => {
+        try {
+            const { page } = req.params || req.query;
+            const filter = req.body.filter;
+            const jobsDatabase = await JobService.query.getPerPageWithFilter(parseInt(page), filter);
+
+            return res.status(SUCCESS_DETAIL[SUCCESS_MESSAGE.OK].status).json(jobsDatabase);
+        } catch (error) {
+            return next(new Error(ERROR_MESSAGE.BAD_REQUEST));
+        }
+    },
     getByCompany: async (
         req: express.Request,
         res: express.Response,
