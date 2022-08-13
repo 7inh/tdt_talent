@@ -1,7 +1,7 @@
 import database from "src/database/database";
 
 export async function getJobTotal() {
-    return await database("job").count("id");
+    return await database("job").where("job.state", "approved").count("id");
 }
 
 export async function getAllJob() {
@@ -38,6 +38,7 @@ export async function getPerPage(page: number) {
             salary: "job.salary",
             employment_type: "job.employment_type",
         })
+        .where("job.state", "approved")
         .offset((page - 1) * 3)
         .limit(3)
         .join("profile", "profile.account_id", "job.account_id")
